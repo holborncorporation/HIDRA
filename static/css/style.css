@@ -28,6 +28,11 @@ body{
   margin-bottom: 60px;
 }
 
+.login-form h3{
+  text-align: center;
+  margin-bottom: 30px;
+}
+
 .txtb{
   border-bottom: 2px solid #adadad;
   position: relative;
