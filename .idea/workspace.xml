@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="52d5edf6-265f-4893-95c6-bd3d1e854c99" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/templates/layout_main.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/layout_main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,8 +27,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/layout_main.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="44" column="10" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
+            <state relative-caret-position="75">
+              <caret line="31" column="57" lean-forward="true" selection-start-line="31" selection-start-column="57" selection-end-line="31" selection-end-column="57" />
             </state>
           </provider>
         </entry>
@@ -196,7 +196,7 @@
       <workItem from="1563146798505" duration="554000" />
       <workItem from="1563152023824" duration="9000" />
       <workItem from="1563152058348" duration="16350000" />
-      <workItem from="1563221491963" duration="28000" />
+      <workItem from="1563221491963" duration="283000" />
     </task>
     <task id="LOCAL-00001" summary="Commiting from PyCharm">
       <created>1563152103273</created>
@@ -205,11 +205,25 @@
       <option name="project" value="LOCAL" />
       <updated>1563152103273</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Made minor modifications">
+      <created>1563221558161</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1563221558161</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Made minor modifications">
+      <created>1563221731424</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1563221731424</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17529000" />
+    <option name="totallyTimeSpent" value="17784000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -222,7 +236,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4991274" visible="true" weight="0.25777063" />
       <window_info id="Structure" order="1" sideWeight="0.5008726" side_tool="true" weight="0.25457877" />
@@ -304,7 +317,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Commiting from PyCharm" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commiting from PyCharm" />
+    <MESSAGE value="Made minor modifications" />
+    <option name="LAST_COMMIT_MESSAGE" value="Made minor modifications" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/HIDRA$HIDRA.coverage" NAME="HIDRA Coverage Results" MODIFIED="1563217732831" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -414,8 +428,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/layout_main.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="44" column="10" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
+        <state relative-caret-position="75">
+          <caret line="31" column="57" lean-forward="true" selection-start-line="31" selection-start-column="57" selection-end-line="31" selection-end-column="57" />
         </state>
       </provider>
     </entry>
