@@ -1,14 +1,13 @@
 {%  extends "layout.html"%}
 {{ super() }}
 {% block content %}
-      <form action={{ url_for('register') }} method="post" class="login-form">
+    <form action={{ url_for('register') }} method="post" class="login-form">
         {{ form.hidden_tag() }}
-          <h3 class="text-primary">Register</h3>
+        <h3 class="text-primary">Register</h3>
 
         <div class="txtb" data-validate="Valid Email is required: ex@abc.xyz">
-{#          <input type="text">#}
-            {{ form.email(class="form-control", type="email")}}
-          <span data-placeholder="Email"></span>
+        {{ form.email(class="form-control", type="email")}}
+        <span data-placeholder="Email"></span>
             <div class="row">
                 <div class="col text-center">
                      {% for error in form.email.errors %}
@@ -19,7 +18,6 @@
         </div>
 
         <div class="txtb" data-validate="Password is required">
-{#          <input type="password">#}
             {{ form.password(class="form-control", type="password")}}
           <span data-placeholder="Password"></span>
             <div class="row">
@@ -32,7 +30,6 @@
         </div>
 
       <div class="txtb" data-validate="First Name is required">
-{#          <input type="password">#}
             {{ form.FirstName(class="form-control", type="text")}}
           <span data-placeholder="First Name"></span>
             <div class="row">
@@ -58,9 +55,12 @@
         </div>
 
       <div class="txtb" data-validate="Select a Role">
-{#          <input type="password">#}
+      <div class="row">
+          <div class="col">
+              <label for="Role">Role</label>
+          </div>
+      </div>
             {{ form.Role(class="form-control")}}
-          <span data-placeholder="Role"></span>
             <div class="row">
                 <div class="col text-center">
                      {% for error in form.Role.errors %}

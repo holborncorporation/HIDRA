@@ -4,4 +4,54 @@
 {% block content %}
 
 
+   <form action={{ url_for('home') }} method="post" class="input-form">
+{#        {{ form.hidden_tag() }}#}
+        <h3 class="text-primary">Inputs</h3>
+       <hr>
+        <div class="txtb">
+            <div class="row">
+                <div class="col">
+                    <label for="Comp">Company Name</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                     <select name="Company" id="Comp" class="form-control">
+                        <option value="0"></option>
+                         <option value="Holborn">Holborn</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+         <div class="txtb">
+            <input type="text" class="form-control" id="txtYear">
+             <span data-placeholder="Year"></span>
+        </div>
+        <div class="txtb">
+            <input type="text" class="form-control" id="txtAnalysisName">
+             <span data-placeholder="Analysis Name"></span>
+        </div>
+
+        <div class="row">
+           <div class="offset-3 col-md-6 text-center">
+                <input type="submit" class="logbtn btn-block btn-lg" value="Submit">
+           </div>
+        </div>
+
+      </form>
+
+      <script type="text/javascript">
+      $(document).ready(function () {
+        $(".txtb input").on("focus",function(){
+            $(this).addClass("focus");
+          });
+
+        $(".txtb input").on("blur",function(){
+            if($(this).val() == "")
+            $(this).removeClass("focus");
+        });
+
+        });
+      </script>
+
 {% endblock %}
