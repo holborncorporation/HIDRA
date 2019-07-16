@@ -1,4 +1,5 @@
 import pymongo
+from bson import ObjectId
 from pymongo import MongoClient
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -37,7 +38,7 @@ def add_user(email, firstname, lastname, password, role):
     results = collection.find_one({"email": email})
     print(results)
     if results:
-        return "User already exists"
+        return False
     else:
         inc_record = collection.insert_one(user_rec)
         print("Data inserted with record ids", inc_record)
@@ -45,4 +46,20 @@ def add_user(email, firstname, lastname, password, role):
         cursor = collection.find()
         for record in cursor:
             print(record)
-            return record
+            return True
+
+
+def find_user_id(id):
+    try:
+        client = MongoClient("mongodb+srv://maxs:hwfi%211920@maxmongo-yndfj.mongodb.net/test?retryWrites=true&w"
+                             "=majority")
+        print("Connected successfully!!!")
+    except:
+        print("Could not connect to MongoDB")
+    db = client.pymongodb
+    collection = db.users
+    results = collection.find_one({'_id': ObjectId(id)})
+    if results:
+        return True
+    else:
+        return False

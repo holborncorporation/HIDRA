@@ -13,31 +13,37 @@ app.config.from_object(Config)
 @app.route('/')
 @app.route('/home')
 def home():
-    print("Home")
-    if 'username' in session:
-        #       We should check to make sure the username is legit through the db before allowing user forward
-        flash('Signed in as: ' + session['username'])
-        return render_template("home.html")
+    if 'userId' in session:
+        print(session['userId'])
+        result = find_user_id(session['userId'])
+        if result:
+            flash('Signed in as: ' + session['username'])
+            return render_template("home.html")
+        else:
+            session.pop('userId', None)
+            session.pop('username', None)
+            session.pop('name', None)
+            return redirect(url_for('login'))
     else:
         return redirect(url_for('login'))
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if 'username' in session:
-        print(session['username'])
-#       We should check to make sure the username is legit through the db before allowing user forward
-        flash('Welcome,' + session['name'])
-        return redirect(url_for("home"))
+    if 'userId' in session:
+        result = find_user_id(session['userId'])
+        if result:
+            flash('Signed in as: ' + session['username'])
+            return render_template("home.html")
     form = LoginForm()
     try:
         if form.validate_on_submit():
             print("inside Validate")
-            print(form.username.data)
             user_info = find_user(form.username.data, form.password.data)
             print(user_info)
             if user_info:
                 session.pop('_flashes', None)
+                session['userId'] = str(user_info.get('_id'))
                 session['username'] = user_info.get('email')
                 session['name'] = user_info.get('firstName')
                 session.permanent = True
@@ -59,9 +65,12 @@ def register():
             user_info = add_user(form.email.data, form.FirstName.data, form.LastName.data, form.password.data,
                                  form.Role.data)
             print(user_info)
+            session.pop('_flashes', None)
             if user_info:
                 flash("Registered")
                 return redirect(url_for('home'))
+            else:
+                flash("An error occurred! User already exists")
         else:
             print(form.errors)
             return render_template('register.html', form=form)
@@ -74,7 +83,9 @@ def register():
 @app.route('/logout')
 def logout():
    # remove the username from the session if it is there
+    session.pop('userId', None)
     session.pop('username', None)
+    session.pop('name', None)
     return redirect(url_for('login'))
 
 

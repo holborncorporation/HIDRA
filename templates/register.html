@@ -70,23 +70,14 @@
             </div>
         </div>
 
-        <input type="submit" class="logbtn" value="Register">
-{#        {{ form.Submit(class="logbtn" )}}#}
-
-{#        <div class="bottom-text">#}
-{#          Don't have an account? <a href="#">Sign up</a>#}
-{#        </div>#}
-        {%  with messages = get_flashed_messages() %}
-            {%  if messages %}
-              <div class="row">
-                    {%  for message in messages %}
-                        <span class="text-danger">
-                            {{ message }}
-                        </span>
-                    {% endfor %}
-                </div>
-            {%  endif %}
-        {% endwith %}
+       <div class="row">
+           <div class="col text-right">
+               <a class="btn btn-secondary btn-lg" href="{{ url_for("login") }}">Back</a>
+           </div>
+           <div class="col text-left">
+                <input type="submit" class="btn btn-primary btn-lg" value="Register">
+           </div>
+       </div>
       </form>
 
       <script type="text/javascript">
@@ -99,6 +90,15 @@
             if($(this).val() == "")
             $(this).removeClass("focus");
           });
+
+          {%  with messages = get_flashed_messages() %}
+            {%  if messages %}
+                    {%  for message in messages %}
+                      $.notify("{{ message }}!", "error");
+                    {% endfor %}
+            {%  endif %}
+        {% endwith %}
+
         });
       </script>
 {% endblock %}

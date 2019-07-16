@@ -6,7 +6,6 @@
           <h1 class="text-primary">Login</h1>
 
         <div class="txtb" data-validate="Valid Email is required: ex@abc.xyz">
-{#          <input type="text">#}
             {{ form.username(class="form-control", type="text")}}
           <span data-placeholder="email"></span>
             <div class="row">
@@ -19,7 +18,6 @@
         </div>
 
         <div class="txtb" data-validate="Password is required">
-{#          <input type="password">#}
             {{ form.password(class="form-control", type="password")}}
           <span data-placeholder="Password"></span>
             <div class="row">
@@ -37,12 +35,6 @@
                 <a href=" {{ url_for("register")}}">Register Here</a>
             </div>
         </div>
-{#        {{ form.Submit(class="logbtn" )}}#}
-
-{#        <div class="bottom-text">#}
-{#          Don't have an account? <a href="#">Sign up</a>#}
-{#        </div>#}
-
       </form>
 
 
