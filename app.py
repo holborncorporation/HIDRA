@@ -15,13 +15,10 @@ app.config.from_object(Config)
 def home():
     print("Home")
     if 'username' in session:
-        print("Home")
-        print(session['username'])
         #       We should check to make sure the username is legit through the db before allowing user forward
-        flash('Welcome, ' + session['name'])
+        flash('Signed in as: ' + session['username'])
         return render_template("home.html")
     else:
-        print("Redirect")
         return redirect(url_for('login'))
 
 
@@ -43,6 +40,7 @@ def login():
                 session.pop('_flashes', None)
                 session['username'] = user_info.get('email')
                 session['name'] = user_info.get('firstName')
+                session.permanent = True
                 return redirect(url_for('home'))
         else:
             print(form.errors)
@@ -58,13 +56,6 @@ def register():
     form = RegisterForm();
     try:
         if form.validate_on_submit():
-            print("inside Validate")
-            print(form.email.data)
-            print(form.FirstName.data)
-            print(form.LastName.data)
-            print(form.password.data)
-            print(form.Role.data)
-
             user_info = add_user(form.email.data, form.FirstName.data, form.LastName.data, form.password.data,
                                  form.Role.data)
             print(user_info)
@@ -78,6 +69,13 @@ def register():
         flash(e)
 
     return render_template('register.html', form=form)
+
+
+@app.route('/logout')
+def logout():
+   # remove the username from the session if it is there
+    session.pop('username', None)
+    return redirect(url_for('login'))
 
 
 if __name__ == '__main__':

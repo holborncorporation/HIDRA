@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>{% block Title %}{% endblock %}- HIDRA</title>
     <meta charset="UTF-8">
     <link href="{{ url_for('static', filename='css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
@@ -14,28 +15,31 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
         <div class="container">
-            <a href="{{ url_for("home")}}" class="navbar-brand ">
-               <i class="fas fa-wind text-primary"></i> Home
+            <a href="{{ url_for("home")}}" class="navbar-brand mb-0 h1">
+               <i class="fal fa-abacus"></i> <span class="text-primary">HIDRA</span>
             </a>
             <div class="collapse navbar-collapse">
-                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
-                        <a href="{{ url_for("home")}}" class="nav-link text-white">Start</a>
-                    </li>
+                <ul class="navbar-nav mr-auto mt-2">
+{#                    <li class="nav-item active">#}
+{#                        <a href="{{ url_for("home")}}" class="nav-link text-white h6"><i class="fas fa-play"></i> Start</a>#}
+{#                    </li>#}
                 </ul>
+                {% with messages = get_flashed_messages() %}
+                    {%  if messages %}
+                        <div class="row">
+                            <div class="col mt-2">
+                                {% for message in messages %}
+                                    <h6 class="navbar-text">{{ message }}</h6>
+                                    <a class="h6" href="{{ url_for("logout") }}"><i class="fas fa-sign-out-alt text-danger"></i></a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
             </div>
 
-            {% with messages = get_flashed_messages() %}
-                {%  if messages %}
-                    <div class="row">
-                        <div class="col">
-                            {% for message in messages %}
-                                <li class="text-white list-unstyled"><i class="fas fa-user"></i> {{ message }}</li>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endif %}
-            {% endwith %}
+
         </div>
     </nav>
     <div id="content">
@@ -47,5 +51,5 @@
 </body>
     <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
-
+    <script type="text/javascript" src="{{ url_for('static', filename='js/notify.min.js') }}"></script>
 </html>

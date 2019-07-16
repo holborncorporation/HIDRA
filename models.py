@@ -34,10 +34,15 @@ def add_user(email, firstname, lastname, password, role):
         "password": generate_password_hash(password),
         "role": role
     }
-    inc_record = collection.insert_one(user_rec)
-    print("Data inserted with record ids", inc_record)
-    # Printing the data inserted
-    cursor = collection.find()
-    for record in cursor:
-        print(record)
-        return record
+    results = collection.find_one({"email": email})
+    print(results)
+    if results:
+        return "User already exists"
+    else:
+        inc_record = collection.insert_one(user_rec)
+        print("Data inserted with record ids", inc_record)
+        # Printing the data inserted
+        cursor = collection.find()
+        for record in cursor:
+            print(record)
+            return record

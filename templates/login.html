@@ -42,31 +42,32 @@
 {#        <div class="bottom-text">#}
 {#          Don't have an account? <a href="#">Sign up</a>#}
 {#        </div>#}
-        {%  with messages = get_flashed_messages() %}
-            {%  if messages %}
-              <div class="row">
-                    {%  for message in messages %}
-                        <span class="text-danger">
-                            {{ message }}
-                        </span>
-                    {% endfor %}
-                </div>
-            {%  endif %}
-        {% endwith %}
+
       </form>
 
 
 
       <script type="text/javascript">
-      $(document).ready(function () {
-          $(".txtb input").on("focus",function(){
-                $(this).addClass("focus");
-              });
 
-          $(".txtb input").on("blur",function(){
+
+      $(document).ready(function () {
+        $(".txtb input").on("focus",function(){
+            $(this).addClass("focus");
+          });
+
+        $(".txtb input").on("blur",function(){
             if($(this).val() == "")
             $(this).removeClass("focus");
-          });
         });
+
+        {%  with messages = get_flashed_messages() %}
+            {%  if messages %}
+                    {%  for message in messages %}
+                      $.notify("{{ message }}!", "info");
+                    {% endfor %}
+            {%  endif %}
+        {% endwith %}
+
+      });
       </script>
 {% endblock %}
