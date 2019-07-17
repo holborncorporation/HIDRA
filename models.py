@@ -1,4 +1,4 @@
-import pymongo
+import base64
 from bson import ObjectId
 from pymongo import MongoClient
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -63,3 +63,33 @@ def find_user_id(id):
         return True
     else:
         return False
+
+
+def add_compnay(company, image):
+    try:
+        client = MongoClient("mongodb+srv://maxs:hwfi%211920@maxmongo-yndfj.mongodb.net/test?retryWrites=true&w"
+                             "=majority")
+        print("Connected successfully!!!")
+    except:
+        print("Could not connect to MongoDB")
+    encoded_string = base64.b64encode(image.read())
+    db = client.pymongodb
+    collection = db.company
+    companyinfo = {
+        "name": company,
+        "logo": encoded_string
+    }
+    results = collection.insert_one(companyinfo)
+    return results
+
+def get_companies():
+    try:
+        client = MongoClient("mongodb+srv://maxs:hwfi%211920@maxmongo-yndfj.mongodb.net/test?retryWrites=true&w"
+                             "=majority")
+        print("Connected successfully!!!")
+    except:
+        print("Could not connect to MongoDB")
+    db = client.pymongodb
+    collection = db.company
+    cursor = collection.find({}, {"_id": 0, "name": 1, "logo": 1})
+    return cursor

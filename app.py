@@ -1,10 +1,8 @@
 from flask import Flask, redirect, render_template, session, flash, url_for
+from allForms import *
 from config import Config
-import logging
-# from flask_login import *
 from loginform import *
 from models import *
-
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -17,8 +15,9 @@ def home():
         print(session['userId'])
         result = find_user_id(session['userId'])
         if result:
-            flash('Signed in as: ' + session['username'])
-            return render_template("home.html")
+            info = get_companies()
+            flash('Signed in as: ' + session['username'], "sign")
+            return render_template("home.html", data=info)
         else:
             session.pop('userId', None)
             session.pop('username', None)
@@ -33,7 +32,7 @@ def login():
     if 'userId' in session:
         result = find_user_id(session['userId'])
         if result:
-            flash('Signed in as: ' + session['username'])
+            flash('Signed in as: ' + session['username'], "sign")
             return render_template("home.html")
     form = LoginForm()
     try:
@@ -53,7 +52,6 @@ def login():
             return render_template('login.html', form=form)
     except Exception as e:
         flash(e)
-
     return render_template('login.html', form=form)
 
 
@@ -82,11 +80,50 @@ def register():
 
 @app.route('/logout')
 def logout():
-   # remove the username from the session if it is there
+    print("logout")
+    # remove the username from the session if it is there
     session.pop('userId', None)
     session.pop('username', None)
     session.pop('name', None)
     return redirect(url_for('login'))
+
+
+def check_user():
+    if 'userId' in session:
+        print("Check User: " + session['userId'])
+        result = find_user_id(session['userId'])
+        if result:
+            flash('Signed in as: ' + session['username'], "sign")
+            return True
+        else:
+            return False
+    else:
+        return False
+
+
+@app.route('/addcompany', methods=['GET', 'POST'])
+def addcompany():
+    form = AddCompanyForm();
+    check = check_user()
+    if check:
+        try:
+            if form.validate_on_submit():
+                user_info = add_compnay(form.CompanyName.data, form.Logo.data)
+                print(user_info)
+                session.pop('_flashes', None)
+                if user_info:
+                    flash("Company Added", "success")
+                    return redirect(url_for('addcompany'))
+                else:
+                    flash("An error occurred!", "error")
+            else:
+                print(form.errors)
+                return render_template('company.html', form=form)
+        except Exception as e:
+            flash(e)
+        return render_template('company.html', form=form)
+    else:
+        return redirect("login")
 
 
 if __name__ == '__main__':

@@ -20,11 +20,11 @@
             </a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mr-auto mt-2">
-{#                    <li class="nav-item active">#}
-{#                        <a href="{{ url_for("home")}}" class="nav-link text-white h6"><i class="fas fa-play"></i> Start</a>#}
-{#                    </li>#}
+                    <li class="nav-item active">
+                        <a href="{{ url_for("addcompany")}}" class="nav-link text-white h6"><i class="fas fa-play"></i> Add Company</a>
+                    </li>
                 </ul>
-                {% with messages = get_flashed_messages() %}
+                {% with messages = get_flashed_messages(category_filter=["sign"]) %}
                     {%  if messages %}
                         <div class="row">
                             <div class="col mt-2">

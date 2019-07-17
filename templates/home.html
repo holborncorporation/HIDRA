@@ -18,7 +18,9 @@
                 <div class="col">
                      <select name="Company" id="Comp" class="form-control">
                         <option value="0"></option>
-                         <option value="Holborn">Holborn</option>
+                         {% for company in data %}
+                              <option value="{{ company["name"]  }}">{{ company["name"] }}</option>
+                         {% endfor %}
                     </select>
                 </div>
             </div>
@@ -34,7 +36,7 @@
 
         <div class="row">
            <div class="offset-3 col-md-6 text-center">
-                <input type="submit" class="logbtn btn-block btn-lg" value="Submit">
+                <input type="submit" class="logbtn btn-block btn-lg" value="Next">
            </div>
         </div>
 
@@ -42,6 +44,7 @@
 
       <script type="text/javascript">
       $(document).ready(function () {
+
         $(".txtb input").on("focus",function(){
             $(this).addClass("focus");
           });

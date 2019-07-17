@@ -1,0 +1,59 @@
+{%  extends "layout_main.html"%}
+{{ super() }}
+{% block Title %}Home {% endblock %}
+{% block content %}
+
+    <form action={{ url_for('addcompany') }} method="post" class="input-form" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <h3 class="text-primary">Inputs</h3>
+       <hr>
+         <div class="txtb">
+            {{ form.CompanyName(class="form-control", type="text") }}
+             <span data-placeholder="Company Name"></span>
+        </div>
+        <div class="txtb">
+             <div class="row">
+                <div class="col">
+                    <label for="Comp">Logo</label>
+                </div>
+            </div>
+           {{ form.Logo (class="form-control")}}
+        </div>
+
+        <div class="row">
+           <div class="offset-3 col-md-6 text-center">
+                <input type="submit" class="logbtn btn-block btn-lg" value="Add">
+           </div>
+        </div>
+
+      </form>
+
+      <script type="text/javascript">
+      $(document).ready(function () {
+        $(".txtb input").on("focus",function(){
+            $(this).addClass("focus");
+          });
+
+        $(".txtb input").on("blur",function(){
+            if($(this).val() == "")
+            $(this).removeClass("focus");
+        });
+         {%  with messages = get_flashed_messages(category_filter=["success"])%}
+            {%  if messages %}
+                    {%  for message in messages %}
+                      $.notify("{{ message }}!", "success");
+                    {% endfor %}
+            {%  endif %}
+        {% endwith %}
+
+        {%  with messages = get_flashed_messages(category_filter=["error"])%}
+            {%  if messages %}
+                    {%  for message in messages %}
+                      $.notify("{{ message }}!", "error");
+                    {% endfor %}
+            {%  endif %}
+        {% endwith %}
+        });
+      </script>
+
+{% endblock %}
