@@ -15,9 +15,11 @@ def home():
         print(session['userId'])
         result = find_user_id(session['userId'])
         if result:
+            form = BasicInfoForm();
             info = get_companies()
+            form.CompanyName.choices = [(row["name"], row["name"]) for row in info]
             flash('Signed in as: ' + session['username'], "sign")
-            return render_template("home.html", data=info)
+            return render_template("home.html", form=form)
         else:
             session.pop('userId', None)
             session.pop('username', None)
@@ -122,6 +124,17 @@ def addcompany():
         except Exception as e:
             flash(e)
         return render_template('company.html', form=form)
+    else:
+        return redirect("login")
+
+
+@app.route('/adminportal', methods=['GET', 'POST'])
+def adminportal():
+    check = check_user()
+    if check:
+        actives = get_active_users()
+        flash(actives, "activeusers")
+        return render_template('adminportal.html')
     else:
         return redirect("login")
 

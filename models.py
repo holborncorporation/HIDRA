@@ -2,6 +2,7 @@ import base64
 from bson import ObjectId
 from pymongo import MongoClient
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin
 
 
 def find_user(email, password):
@@ -82,6 +83,7 @@ def add_compnay(company, image):
     results = collection.insert_one(companyinfo)
     return results
 
+
 def get_companies():
     try:
         client = MongoClient("mongodb+srv://maxs:hwfi%211920@maxmongo-yndfj.mongodb.net/test?retryWrites=true&w"
@@ -93,3 +95,18 @@ def get_companies():
     collection = db.company
     cursor = collection.find({}, {"_id": 0, "name": 1, "logo": 1})
     return cursor
+
+
+def get_active_users():
+    try:
+        client = MongoClient("mongodb+srv://maxs:hwfi%211920@maxmongo-yndfj.mongodb.net/test?retryWrites=true&w"
+                             "=majority")
+        print("Connected successfully!!!")
+    except:
+        print("Could not connect to MongoDB")
+
+    db = client.pymongodb
+    collection = db.users
+    results = collection.find({})
+    results = results.count()
+    return results

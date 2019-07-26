@@ -1,6 +1,6 @@
 {%  extends "layout_main.html"%}
 {{ super() }}
-{% block Title %}Home {% endblock %}
+{% block Title %}Add a Company {% endblock %}
 {% block content %}
 
     <form action={{ url_for('addcompany') }} method="post" class="input-form" enctype="multipart/form-data">

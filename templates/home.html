@@ -2,59 +2,127 @@
 {{ super() }}
 {% block Title %}Home {% endblock %}
 {% block content %}
-
-
-   <form action={{ url_for('home') }} method="post" class="input-form">
-{#        {{ form.hidden_tag() }}#}
-        <h3 class="text-primary">Inputs</h3>
-       <hr>
-        <div class="txtb">
-            <div class="row">
-                <div class="col">
-                    <label for="Comp">Company Name</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                     <select name="Company" id="Comp" class="form-control">
-                        <option value="0"></option>
-                         {% for company in data %}
-                              <option value="{{ company["name"]  }}">{{ company["name"] }}</option>
-                         {% endfor %}
-                    </select>
-                </div>
-            </div>
-        </div>
-         <div class="txtb">
-            <input type="text" class="form-control" id="txtYear">
-             <span data-placeholder="Year"></span>
-        </div>
-        <div class="txtb">
-            <input type="text" class="form-control" id="txtAnalysisName">
-             <span data-placeholder="Analysis Name"></span>
-        </div>
-
+    <div class="container">
         <div class="row">
-           <div class="offset-3 col-md-6 text-center">
-                <input type="submit" class="logbtn btn-block btn-lg" value="Next">
-           </div>
+            <div class="offset-3 col-sm-6">
+        <div class="card m-3 text-white">
+          <div class="card-header bg-info text-white">
+            <h5>Basic Information</h5>
+          </div>
+          <div class="card-body">
+{#            <h5 class="card-title"></h5>#}
+            <form action={{ url_for('home') }} method="post" class="">
+                {{ form.hidden_tag() }}
+                    <div class="row">
+                        <div class="col">
+                            <label for="Comp">Company Name</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                             {{ form.CompanyName (class="form-control") }}
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col">
+                            <label for="Year">Year</label>
+                        </div>
+                    </div>
+                     <div class="row">
+                         <div class="col">
+                             {{ form.Year (class="form-control yearformat", placeholder="YYYY", autocomplete="no") }}
+                         </div>
+                    </div>
+
+                     <div class="row mt-2">
+                        <div class="col">
+                            <label for="AnalysisName">Analysis Name</label>
+                        </div>
+                    </div>
+                     <div class="row">
+                         <div class="col">
+                            {{ form.AnalysisName (class="form-control") }}
+                         </div>
+                     </div>
+
+                    <div class="row mt-2">
+                        <div class="col">
+                            <label for="LargeCat">Large CAT</label>
+                        </div>
+                    </div>
+                     <div class="row">
+                         <div class="col">
+                            {{ form.LargeCat (class="form-control") }}
+                         </div>
+                     </div>
+
+                     <div class="row mt-2">
+                        <div class="col">
+                            <label for="SmallCat">Small CAT</label>
+                        </div>
+                    </div>
+                     <div class="row">
+                         <div class="col">
+                            {{ form.SmallCat (class="form-control") }}
+                         </div>
+                     </div>
+
+                    <div class="row mt-2">
+                        <div class="col">
+                            <label for="NonCat">Non CAT</label>
+                        </div>
+                    </div>
+                     <div class="row">
+                         <div class="col">
+                            {{ form.NonCat (class="form-control") }}
+                         </div>
+                     </div>
+
+                     <div class="row mt-2">
+                        <div class="col">
+                            <label for="CatThreshold">CAT Threshold</label>
+                        </div>
+                    </div>
+                     <div class="row">
+                         <div class="col">
+                            {{ form.CatThreshold (class="form-control cat-treshold") }}
+                         </div>
+                     </div>
+
+                    <div class="row mt-2">
+                        <div class="col">
+                            <label for="NumOfSims">Number of Simulations</label>
+                        </div>
+                    </div>
+                     <div class="row">
+                         <div class="col">
+                            {{ form.NumOfSims (class="form-control num-of-sims") }}
+                         </div>
+                     </div>
+                <hr class="border border-secondary">
+                <div class="row">
+                   <div class="offset-3 col-md-6 text-center">
+                        <input type="submit" class=" btn btn-primary btn-block btn-lg" value="Next">
+                   </div>
+                </div>
+              </form>
+          </div>
+        </div>
+            </div>
         </div>
 
-      </form>
+    </div>
 
-      <script type="text/javascript">
+
+
+  <script type="text/javascript">
       $(document).ready(function () {
-
-        $(".txtb input").on("focus",function(){
-            $(this).addClass("focus");
-          });
-
-        $(".txtb input").on("blur",function(){
-            if($(this).val() == "")
-            $(this).removeClass("focus");
-        });
+            new AutoNumeric('.cat-treshold', 'integer');
+            new AutoNumeric('.num-of-sims', 'integer');
 
         });
-      </script>
+
+  </script>
 
 {% endblock %}

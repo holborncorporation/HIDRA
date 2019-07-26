@@ -1,0 +1,119 @@
+{% extends "layout_main.html" %}
+{{ super() }}
+{% block Title %}Admin Portal {% endblock %}
+{% block content %}
+
+    <div class="container mt-5">
+        <div class="row p-5 text-center border border-secondary rounded shadow">
+
+            <div class="col-md-2 bg-light p-5 border border-secondary shadow rounded offset-2">
+                <div class="row">
+                    <div class="col text-center">
+                        <h3><i class="fas fa-users fa-2x"></i></h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col  text-center">
+                        {% with messages = get_flashed_messages(category_filter=["activeusers"]) %}
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <h4>{{ message }}</h4>
+                                {% endfor %}
+                            {% endif %}
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2 offset-1 bg-info p-5 border border-white rounded shadow">
+                <div class="row">
+                    <div class="col text-center p-0">
+                        <h3><i class="fas fa-building fa-2x text-light"></i></h3>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col  text-center text-light p-0">
+                        <a href="{{ url_for("addcompany") }}">
+                            <h5 class="text-light">
+                                Add Company
+                            </h5>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2 offset-1 bg-dark p-5 border border-white rounded shadow">
+                <div class="row">
+                    <div class="col text-center p-0">
+                        <h3><i class="fas fa-database fa-2x text-warning"></i></h3>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col text-center p-0">
+                       <h5 class="text-success">Active</h5>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    {#    cards#}
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="card-deck">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        Active Users
+                    </div>
+                    <div class="card-body bg-light">
+                        <p class="card-text">
+                            <canvas id="myChart"></canvas>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+
+        var chartdata = {
+            labels: ["Active", "Inactive"],
+            datasets: [{
+                backgroundColor: ["#2980b9", "#e74c3c"],
+                borderColor: 'rgba(200,200,200,0.75)',
+                hoverBorderColor: 'rgba(200,200,200,20)',
+                data: [10, 50]
+            }]
+        }
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var donutchart = new Chart(ctx,
+            {
+                type: 'doughnut',
+                data: chartdata,
+                options: {
+                    plugins: {
+                        labels: {
+                            render: 'percentage',
+                            fontColor: '#fff',
+                            fontSize: 12
+                        }
+
+                    },
+                    legend: {
+                        labels: {
+                            fontColor: "black",
+                            fontSize: 12
+                        }
+                    },
+                }
+            });
+
+    </script>
+{% endblock %}
